@@ -8,11 +8,11 @@ const Heroes = () => {
 
   //didMount
   useEffect(() => {
-    fetchData()
+    fetchHeroes()
   }, [])
 
   // methodes
-  const fetchData = async () => {
+  const fetchHeroes = async () => {
     const request = await fetch("http://localhost:5000/heroes/")
     const response = await request.json()
     setHeroes(response)
@@ -33,7 +33,6 @@ const Heroes = () => {
       age: null,
       image: "",
     }
-    console.log(newHero)
     await fetch("http://localhost:5000/heroes/", {
       method: "POST",
       headers: {
@@ -41,6 +40,7 @@ const Heroes = () => {
       },
       body: JSON.stringify(newHero),
     })
+    fetchHeroes()
   }
 
   return (

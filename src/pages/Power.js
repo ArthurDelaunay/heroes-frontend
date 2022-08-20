@@ -31,28 +31,30 @@ const Power = () => {
   }
 
   const handleDeleteClick = async (power) => {
-    await fetch(`http://localhost:5000/heroes/${params.slug}/powers/${power}`, {
-      method: "DELETE",
-    })
+    const request = await fetch(
+      `http://localhost:5000/heroes/${params.slug}/powers/${power}`,
+      {
+        method: "DELETE",
+      }
+    )
+    const response = await request.json()
+    fetchPowers()
+    alert(response)
   }
   const handleSubmitClick = async (e) => {
     e.preventDefault()
     const newHero = { ...hero }
     newHero.power = newPower
-    console.log(newHero)
     setHero(newHero)
 
-    const request = await fetch(
-      `http://localhost:5000/heroes/${params.slug}/powers`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newHero),
-      }
-    )
-    console.log(await request.json())
+    await fetch(`http://localhost:5000/heroes/${params.slug}/powers`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newHero),
+    })
+    fetchPowers()
   }
 
   const handleNewPowerChange = (e) => {
