@@ -5,7 +5,7 @@ const Hero = () => {
   const navigate = useNavigate()
   const params = useParams()
   //states
-  const [hero, setHero] = useState([])
+  const [hero, setHero] = useState({})
   const [changeRender, setChangeRender] = useState(false)
   const [name, setName] = useState("")
   const [power, setPower] = useState([])
@@ -101,7 +101,7 @@ const Hero = () => {
       power: checkPower,
       color: color,
       isAlive: isAlive,
-      age: age,
+      age: Number(age),
       image: image,
     }
     await fetch(`http://localhost:5000/heroes/${params.slug}/`, {
